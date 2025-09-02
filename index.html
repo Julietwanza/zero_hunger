@@ -16,36 +16,39 @@
             background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 50%, #66BB6A 100%);
             min-height: 100vh;
             color: #333;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1rem;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 2rem;
             color: white;
+            padding: 1rem 0;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: 1.2em;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             opacity: 0.9;
+            padding: 0 1rem;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
+            padding: clamp(1rem, 4vw, 2rem);
+            margin: 1rem 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
@@ -53,30 +56,33 @@
 
         .prediction-form {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
+            min-width: 0; /* Prevents overflow */
         }
 
         .form-group label {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
             color: #2E7D32;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
         .form-group input,
         .form-group select {
-            padding: 12px;
+            padding: clamp(0.75rem, 2.5vw, 1rem);
             border: 2px solid #E8F5E8;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             transition: all 0.3s ease;
             background: white;
+            width: 100%;
         }
 
         .form-group input:focus,
@@ -90,14 +96,18 @@
             background: linear-gradient(45deg, #4CAF50, #66BB6A);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: clamp(0.75rem 1.5rem, 3vw, 1rem 2rem);
             border-radius: 8px;
-            font-size: 16px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
         }
 
         .btn:hover {
@@ -110,58 +120,68 @@
         }
 
         .results {
-            margin-top: 30px;
+            margin-top: 2rem;
         }
 
         .result-card {
             background: linear-gradient(135deg, #F1F8E9, #E8F5E8);
             border: 2px solid #4CAF50;
             border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
+            padding: clamp(1rem, 4vw, 1.5rem);
+            margin: 1rem 0;
         }
 
         .result-title {
-            font-size: 1.3em;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: bold;
             color: #2E7D32;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .result-value {
-            font-size: 2em;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: bold;
             color: #1B5E20;
-            margin: 10px 0;
+            margin: 0.5rem 0;
         }
 
         .confidence {
             background: #4CAF50;
             color: white;
-            padding: 5px 15px;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.9em;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
             display: inline-block;
+            white-space: nowrap;
         }
 
         .weather-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: clamp(0.75rem, 3vw, 1rem);
+            margin: 1rem 0;
         }
 
         .weather-item {
             text-align: center;
             background: rgba(255,255,255,0.6);
-            padding: 15px;
+            padding: clamp(0.75rem, 3vw, 1rem);
             border-radius: 8px;
+            min-width: 0; /* Prevents overflow */
+        }
+
+        .weather-item .label {
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            color: #666;
+            margin-bottom: 0.25rem;
         }
 
         .weather-item .value {
-            font-size: 1.5em;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             font-weight: bold;
             color: #1B5E20;
         }
@@ -170,13 +190,14 @@
             background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
             border: 2px solid #FF9800;
             border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
+            padding: clamp(1rem, 4vw, 1.5rem);
+            margin: 1rem 0;
         }
 
         .recommendations h3 {
             color: #E65100;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
         }
 
         .recommendations ul {
@@ -185,22 +206,24 @@
         }
 
         .recommendations li {
-            padding: 10px 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid rgba(255,152,0,0.2);
             position: relative;
-            padding-left: 25px;
+            padding-left: 2rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
 
         .recommendations li:before {
             content: "🌱";
             position: absolute;
             left: 0;
+            top: 0.75rem;
         }
 
         .loading {
             text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
+            padding: 2rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             color: #666;
         }
 
@@ -223,12 +246,14 @@
         .tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
-            gap: 10px;
+            margin-bottom: 2rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
         }
 
         .tab {
-            padding: 12px 24px;
+            padding: clamp(0.5rem 1rem, 2.5vw, 0.75rem 1.5rem);
             background: rgba(255,255,255,0.2);
             color: white;
             border: none;
@@ -236,6 +261,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            min-width: 0;
+            flex-shrink: 0;
         }
 
         .tab.active {
@@ -254,53 +282,132 @@
 
         .language-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: clamp(1rem, 3vw, 1.25rem);
+            right: clamp(1rem, 3vw, 1.25rem);
             background: rgba(255,255,255,0.9);
             border: none;
-            padding: 10px 15px;
+            padding: clamp(0.5rem 0.75rem, 2.5vw, 0.625rem 1rem);
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
             color: #2E7D32;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            z-index: 100;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
+        .language-toggle:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.05);
+        }
+
+        /* Form button group for better mobile UX */
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+
+        /* Better grid for weather and results on mobile */
+        @media (max-width: 480px) {
+            .weather-info {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .header h1 {
-                font-size: 2em;
+            .tabs {
+                gap: 0.25rem;
             }
             
-            .card {
-                padding: 20px;
+            .tab {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.75rem;
             }
             
             .prediction-form {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .prediction-form {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .weather-info {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Desktop optimizations */
+        @media (min-width: 769px) {
+            .container {
+                padding: 2rem;
+            }
+            
+            .prediction-form {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .weather-info {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .btn {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+
+        /* Large desktop optimizations */
+        @media (min-width: 1024px) {
+            .prediction-form {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .weather-info {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Focus styles for better accessibility */
+        .tab:focus,
+        .btn:focus,
+        .language-toggle:focus {
+            outline: 2px solid #FFF;
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <button class="language-toggle" onclick="toggleLanguage()">🌍 EN/SW</button>
+    <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle language">🌍 EN/SW</button>
     
     <div class="container">
-        <div class="header">
+        <header class="header">
             <h1 id="main-title">Kenya Zero Hunger AI</h1>
             <p id="subtitle">Smart Agriculture Assistant for Sustainable Farming</p>
-        </div>
+        </header>
 
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('prediction')" id="tab-prediction">🌾 Crop Prediction</button>
-            <button class="tab" onclick="showTab('weather')" id="tab-weather">🌤️ Weather</button>
-            <button class="tab" onclick="showTab('recommendations')" id="tab-recommendations">📋 Advice</button>
-        </div>
+        <nav class="tabs" role="tablist">
+            <button class="tab active" onclick="showTab('prediction')" id="tab-prediction" role="tab" aria-selected="true">🌾 Crop Prediction</button>
+            <button class="tab" onclick="showTab('weather')" id="tab-weather" role="tab" aria-selected="false">🌤️ Weather</button>
+            <button class="tab" onclick="showTab('recommendations')" id="tab-recommendations" role="tab" aria-selected="false">📋 Advice</button>
+        </nav>
 
         <!-- Prediction Tab -->
-        <div id="prediction-tab" class="tab-content active">
+        <div id="prediction-tab" class="tab-content active" role="tabpanel">
             <div class="card">
                 <h2 id="prediction-title">Crop Yield Prediction</h2>
                 <p id="prediction-desc">Enter your farming details to get AI-powered yield predictions</p>
@@ -347,4 +454,212 @@
                     
                     <div class="form-group">
                         <label for="soil-ph" id="label-soil">Soil pH</label>
-                        <input type="number" id="soil-ph" step="0.1" min="4"
+                        <input type="number" id="soil-ph" step="0.1" min="4" max="9" placeholder="6.5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="farm-size" id="label-size">Farm Size (Acres)</label>
+                        <input type="number" id="farm-size" step="0.1" min="0.1" placeholder="2.5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rainfall" id="label-rainfall">Expected Rainfall (mm)</label>
+                        <input type="number" id="rainfall" step="1" min="0" placeholder="800" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="predict-btn">Predict Yield</button>
+                    </div>
+                </form>
+                
+                <div id="prediction-results" class="results"></div>
+            </div>
+        </div>
+
+        <!-- Weather Tab -->
+        <div id="weather-tab" class="tab-content" role="tabpanel">
+            <div class="card">
+                <h2 id="weather-title">Weather Information</h2>
+                <p id="weather-desc">Current weather conditions and forecast</p>
+                
+                <div class="weather-info">
+                    <div class="weather-item">
+                        <div class="label">Temperature</div>
+                        <div class="value">24°C</div>
+                    </div>
+                    <div class="weather-item">
+                        <div class="label">Humidity</div>
+                        <div class="value">65%</div>
+                    </div>
+                    <div class="weather-item">
+                        <div class="label">Rainfall</div>
+                        <div class="value">12mm</div>
+                    </div>
+                    <div class="weather-item">
+                        <div class="label">Wind Speed</div>
+                        <div class="value">8 km/h</div>
+                    </div>
+                    <div class="weather-item">
+                        <div class="label">UV Index</div>
+                        <div class="value">6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Tab -->
+        <div id="recommendations-tab" class="tab-content" role="tabpanel">
+            <div class="card">
+                <div class="recommendations">
+                    <h3 id="rec-title">Farming Recommendations</h3>
+                    <ul id="recommendations-list">
+                        <li>Plant maize during long rains for optimal yield</li>
+                        <li>Consider intercropping with beans to improve soil fertility</li>
+                        <li>Apply organic fertilizer 2 weeks before planting</li>
+                        <li>Implement water conservation techniques like mulching</li>
+                        <li>Monitor crop for pest and disease early detection</li>
+                        <li>Harvest at optimal moisture content for better storage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language toggle functionality
+        let currentLanguage = 'en';
+        
+        const translations = {
+            en: {
+                'main-title': 'Kenya Zero Hunger AI',
+                'subtitle': 'Smart Agriculture Assistant for Sustainable Farming',
+                'tab-prediction': '🌾 Crop Prediction',
+                'tab-weather': '🌤️ Weather',
+                'tab-recommendations': '📋 Advice',
+                'prediction-title': 'Crop Yield Prediction',
+                'prediction-desc': 'Enter your farming details to get AI-powered yield predictions',
+                'label-crop': 'Crop Type',
+                'label-location': 'Location',
+                'label-season': 'Growing Season',
+                'label-soil': 'Soil pH',
+                'label-size': 'Farm Size (Acres)',
+                'label-rainfall': 'Expected Rainfall (mm)',
+                'predict-btn': 'Predict Yield',
+                'weather-title': 'Weather Information',
+                'weather-desc': 'Current weather conditions and forecast',
+                'rec-title': 'Farming Recommendations'
+            },
+            sw: {
+                'main-title': 'Kenya Hakuna Njaa AI',
+                'subtitle': 'Msaidizi wa Kilimo wa Akili kwa Kilimo Endelevu',
+                'tab-prediction': '🌾 Utabiri wa Mazao',
+                'tab-weather': '🌤️ Hali ya Hewa',
+                'tab-recommendations': '📋 Ushauri',
+                'prediction-title': 'Utabiri wa Mavuno ya Mazao',
+                'prediction-desc': 'Ingiza maelezo yako ya kilimo kupata utabiri wa AI',
+                'label-crop': 'Aina ya Zao',
+                'label-location': 'Mahali',
+                'label-season': 'Msimu wa Ukuaji',
+                'label-soil': 'pH ya Udongo',
+                'label-size': 'Ukubwa wa Shamba (Ekari)',
+                'label-rainfall': 'Mvua Inayotarajiwa (mm)',
+                'predict-btn': 'Tabiri Mavuno',
+                'weather-title': 'Habari za Hali ya Hewa',
+                'weather-desc': 'Hali ya hewa ya sasa na utabiri',
+                'rec-title': 'Mapendekezo ya Kilimo'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'sw' : 'en';
+            
+            Object.keys(translations[currentLanguage]).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = translations[currentLanguage][id];
+                }
+            });
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            document.getElementById('tab-' + tabName).classList.add('active');
+            document.getElementById('tab-' + tabName).setAttribute('aria-selected', 'true');
+        }
+
+        function predictYield(event) {
+            event.preventDefault();
+            
+            const resultsDiv = document.getElementById('prediction-results');
+            resultsDiv.innerHTML = '<div class="loading">Calculating predictions...</div>';
+            
+            // Simulate API call
+            setTimeout(() => {
+                const cropType = document.getElementById('crop-type').value;
+                const location = document.getElementById('location').value;
+                const farmSize = document.getElementById('farm-size').value;
+                
+                // Mock prediction calculation
+                const baseYield = {
+                    'maize': 25,
+                    'beans': 12,
+                    'wheat': 18,
+                    'rice': 30,
+                    'sorghum': 15,
+                    'tea': 2500,
+                    'coffee': 800
+                };
+                
+                const locationMultiplier = {
+                    'Nairobi': 0.9,
+                    'Mombasa': 0.8,
+                    'Kisumu': 1.1,
+                    'Nakuru': 1.2,
+                    'Eldoret': 1.3,
+                    'Meru': 1.1,
+                    'Thika': 1.0,
+                    'Kitale': 1.2
+                };
+                
+                const predictedYield = (baseYield[cropType] * locationMultiplier[location] * farmSize).toFixed(1);
+                const confidence = Math.floor(Math.random() * 20) + 75; // 75-94%
+                
+                resultsDiv.innerHTML = `
+                    <div class="result-card">
+                        <div class="result-title">
+                            📊 Predicted Yield
+                            <span class="confidence">${confidence}% Confidence</span>
+                        </div>
+                        <div class="result-value">${predictedYield} ${cropType === 'tea' || cropType === 'coffee' ? 'kg' : 'bags'}</div>
+                        <p>Based on your farming conditions in ${location} for ${farmSize} acres of ${cropType}.</p>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h3>Optimization Tips</h3>
+                        <ul>
+                            <li>Consider soil testing for precise nutrient management</li>
+                            <li>Implement drip irrigation for water efficiency</li>
+                            <li>Use certified seeds for better germination rates</li>
+                            <li>Apply organic matter to improve soil structure</li>
+                        </ul>
+                    </div>
+                `;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
