@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Zero Hunger AI - Agriculture Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 50%, #66BB6A 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .prediction-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 2px solid #E8F5E8;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #F1F8E9, #E8F5E8);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .result-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .result-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1B5E20;
+            margin: 10px 0;
+        }
+
+        .confidence {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .weather-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .weather-item {
+            text-align: center;
+            background: rgba(255,255,255,0.6);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .weather-item .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1B5E20;
+        }
+
+        .recommendations {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .recommendations h3 {
+            color: #E65100;
+            margin-bottom: 15px;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,152,0,0.2);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .recommendations li:before {
+            content: "🌱";
+            position: absolute;
+            left: 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .loading:after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #4CAF50;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: white;
+            color: #2E7D32;
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .prediction-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="language-toggle" onclick="toggleLanguage()">🌍 EN/SW</button>
+    
+    <div class="container">
+        <div class="header">
+            <h1 id="main-title">Kenya Zero Hunger AI</h1>
+            <p id="subtitle">Smart Agriculture Assistant for Sustainable Farming</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('prediction')" id="tab-prediction">🌾 Crop Prediction</button>
+            <button class="tab" onclick="showTab('weather')" id="tab-weather">🌤️ Weather</button>
+            <button class="tab" onclick="showTab('recommendations')" id="tab-recommendations">📋 Advice</button>
+        </div>
+
+        <!-- Prediction Tab -->
+        <div id="prediction-tab" class="tab-content active">
+            <div class="card">
+                <h2 id="prediction-title">Crop Yield Prediction</h2>
+                <p id="prediction-desc">Enter your farming details to get AI-powered yield predictions</p>
+                
+                <form class="prediction-form" onsubmit="predictYield(event)">
+                    <div class="form-group">
+                        <label for="crop-type" id="label-crop">Crop Type</label>
+                        <select id="crop-type" required>
+                            <option value="">Select crop...</option>
+                            <option value="maize">Maize (Mahindi)</option>
+                            <option value="beans">Beans (Maharagwe)</option>
+                            <option value="wheat">Wheat (Ngano)</option>
+                            <option value="rice">Rice (Mchele)</option>
+                            <option value="sorghum">Sorghum (Mtama)</option>
+                            <option value="tea">Tea (Chai)</option>
+                            <option value="coffee">Coffee (Kahawa)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location" id="label-location">Location</label>
+                        <select id="location" required>
+                            <option value="">Select location...</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Eldoret">Eldoret</option>
+                            <option value="Meru">Meru</option>
+                            <option value="Thika">Thika</option>
+                            <option value="Kitale">Kitale</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="season" id="label-season">Growing Season</label>
+                        <select id="season" required>
+                            <option value="">Select season...</option>
+                            <option value="long_rains">Long Rains (Mar-May)</option>
+                            <option value="short_rains">Short Rains (Oct-Dec)</option>
+                            <option value="dry">Dry Season</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="soil-ph" id="label-soil">Soil pH</label>
+                        <input type="number" id="soil-ph" step="0.1" min="4"
